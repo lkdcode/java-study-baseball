@@ -1,9 +1,9 @@
 package exception;
 
-public class InputDuplicationException extends Exception {
+public class InputCommandException extends Exception {
 
-    public InputDuplicationException() {
-        super(ErrorMessage.USER_INPUT_DUPLICATION.getMessage());
+    public InputCommandException() {
+        super(ErrorMessage.USER_INPUT_COMMAND.getMessage());
     }
 
 }

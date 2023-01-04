@@ -1,2 +1,5 @@
-package user;public enum UserStatus {
+package user;
+
+public enum UserStatus {
+    PLAY,QUIT
 }

@@ -1,8 +1,9 @@
+package data;
+
 public class DataBase {
     private static final DataBase instance = new DataBase();
     private int stage = 3;
-    private int levelUp = 1;
-
+//    private int score = 0;
 
     private DataBase() {
     }
@@ -12,6 +13,10 @@ public class DataBase {
     }
 
     public int getStage() {
-        return stage;
+        return this.stage;
+    }
+
+    public void setStage() {
+        this.stage++;
     }
 }

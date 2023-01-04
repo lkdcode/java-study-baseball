@@ -1,6 +1,6 @@
-package controller.userinput.number.computer;
+package data.computer;
 
-import controller.userinput.number.RandomNumber;
+import data.RandomNumber;
 import data.DataBase;
 
 import java.util.ArrayList;
@@ -11,17 +11,15 @@ public class Computer implements RandomNumber {
     private final int MAX = 10;
     private final Random random;
     private List<Integer> randomNumbers;
-    private int stage;
 
     public Computer() {
         this.random = new Random();
-        this.stage = DataBase.getInstance().getStage();
     }
 
     @Override
     public void makeNumbers() {
         this.randomNumbers = new ArrayList<>();
-        while (randomNumbers.size() != stage) {
+        while (randomNumbers.size() != DataBase.getInstance().getStage()) {
             int inputNumber = random.nextInt(MAX);
             if (!randomNumbers.contains(inputNumber)) {
                 randomNumbers.add(inputNumber);

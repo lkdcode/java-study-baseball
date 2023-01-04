@@ -1,22 +1,9 @@
-public class UserException extends Exception {
+package exception;
 
+public class InputDuplicationException extends Exception {
 
-    public UserException() {
-    }
-
-    public UserException(String message){
-        super(message);
-    }
-
-
-    public void lengthException() {
-    }
-    public void duplicateException() {
-
-    }
-
-    public void onlyNumberException() {
-
+    public InputDuplicationException() {
+        super(ErrorMessage.USER_INPUT_DUPLICATION.getMessage());
     }
 
 }

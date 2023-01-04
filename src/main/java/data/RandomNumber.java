@@ -1,4 +1,4 @@
-package controller.userinput.number;
+package data;
 
 public interface RandomNumber {
     void makeNumbers();

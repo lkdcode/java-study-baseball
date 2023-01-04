@@ -1,7 +1,7 @@
-package controller.userinput.number.user;
+package controller.userinput.number;
 
-import controller.userinput.number.RandomNumber;
 import data.DataBase;
+import data.RandomNumber;
 import ui.Message;
 
 import java.util.ArrayList;
@@ -12,30 +12,32 @@ public class UserInputNumber implements RandomNumber {
     private final Scanner scanner;
     private final UserInputNumberValidate userInputValidate;
     private List<Integer> userNumbers;
-    private int stage;
 
     public UserInputNumber() {
         this.userInputValidate = new UserInputNumberValidate();
         this.scanner = new Scanner(System.in);
-        this.stage = DataBase.getInstance().getStage();
     }
 
     @Override
     public void makeNumbers() {
         this.userNumbers = new ArrayList<>();
-        boolean validate;
-        String userInput;
-
-        do {
-            Message.INPUT_NUMBER.print();
-            userInput = scanner.nextLine();
-            validate = userInputValidate.userInputNumbers(userInput);
-        } while (!validate);
+        String userInput = inputNumber();
         addNumbers(userInput);
     }
 
+    private String inputNumber() {
+        boolean isValidate;
+        String userInput;
+        do {
+            Message.INPUT_NUMBER.print();
+            userInput = scanner.nextLine();
+            isValidate = userInputValidate.userInputNumbers(userInput);
+        } while (!isValidate);
+        return userInput;
+    }
+
     private void addNumbers(String userInput) {
-        for (int i = 0; i < stage; i++) {
+        for (int i = 0; i < DataBase.getInstance().getStage(); i++) {
             userNumbers.add(Integer.parseInt(String.valueOf(userInput.charAt(i))));
         }
     }

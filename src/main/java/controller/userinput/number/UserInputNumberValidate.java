@@ -1,15 +1,15 @@
-package controller.userinput.number.user;
+package controller.userinput.number;
 
 import data.DataBase;
 import exception.ErrorMessage;
 import exception.InputDuplicationException;
 import exception.InputLengthException;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class UserInputNumberValidate {
 
-    private int stage = DataBase.getInstance().getStage();
     private String inputNumber;
 
 
@@ -32,32 +32,40 @@ public class UserInputNumberValidate {
         return true;
     }
 
+    /**
+     * @return
+     * @throws InputDuplicationException
+     */
     private boolean isDuplication() throws InputDuplicationException {
-        HashSet<Character> duplication = new HashSet<>();
+        HashSet<String> duplication = new HashSet<>(Arrays.asList(inputNumber.split("")));
 
-        for (int i = 0; i < inputNumber.length(); i++) {
-            duplication.add(inputNumber.charAt(i));
-        }
-
-        if (duplication.size() != stage) {
+        if (duplication.size() != DataBase.getInstance().getStage()) {
             ErrorMessage.USER_INPUT_DUPLICATION.getMessage();
             throw new InputDuplicationException();
         }
+
         return true;
     }
 
+    /**
+     * @return
+     * @throws InputLengthException
+     */
     private boolean isNumberLength() throws InputLengthException {
-        if (inputNumber.length() != stage) {
-            throw new InputLengthException(stage);
+        if (inputNumber.length() != DataBase.getInstance().getStage()) {
+            throw new InputLengthException(DataBase.getInstance().getStage());
         }
         return true;
     }
 
+    /**
+     * @return
+     * @throws NumberFormatException
+     */
     private boolean isNumber() throws NumberFormatException {
         try {
-            Integer.parseInt(inputNumber);
+            Long.parseLong(inputNumber);
         } catch (NumberFormatException e) {
-
             throw new NumberFormatException(ErrorMessage.USER_INPUT_ONLY_NUMBER.getMessage());
         }
         return true;
