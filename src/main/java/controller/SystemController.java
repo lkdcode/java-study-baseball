@@ -7,6 +7,7 @@ import ui.Message;
 public class SystemController {
     private final PlayController playController;
     private final UserInputCommand userInputCommand;
+    private final int WIN_POINT = 11;
 
     public SystemController() {
         this.playController = new PlayController();
@@ -16,21 +17,31 @@ public class SystemController {
     }
 
     public void start() {
+        boolean retry = true;
         do {
             playController.playBaseball();
-            boolean retry = userInputCommand.inputCommand();
-            //re
-            if (DataBase.getInstance().getStage() > 10) {
-                System.out.println("최종 승리!!!!");
-                return;
-            }
-            //
-
-            //re
-            if (!retry) {
+            DataBase.getInstance().setStage();
+            if (isEndStage()) {
                 break;
             }
-            //
-        } while (true);
+            retry = userInputCommand.inputCommand();
+        } while (retry);
+        end();
+    }
+
+    private boolean isEndStage() {
+        if (DataBase.getInstance().getStage() == WIN_POINT) {
+            Message.WIN.print();
+            return true;
+        }
+        return false;
+    }
+
+    private void end() {
+        System.out.println();
+        System.out.println("🏟️ -- 최종 결과 출력 -- 🏟");
+        System.out.println("✅ 최종 스테이지 : " + ((DataBase.getInstance().getStage()) - 3) + "Lv");
+        System.out.println("✅ 최종 점수 : " + DataBase.getInstance().getScore() + "점");
+        Message.GAME_EXIT.print();
     }
 }
