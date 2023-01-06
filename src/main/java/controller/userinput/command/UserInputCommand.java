@@ -28,7 +28,6 @@ public class UserInputCommand {
 
             if (userInput.equals(RETRY)) {
                 UserStatusHandler.getInstance().setUserStatus(UserStatus.PLAY);
-                DataBase.getInstance().setStage();
                 Message.LEVEL_UP.print();
                 Message.INPUT_LENGTH.print();
                 System.out.println(DataBase.getInstance().getStage());
