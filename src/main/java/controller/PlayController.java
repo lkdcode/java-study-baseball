@@ -32,14 +32,18 @@ public class PlayController {
             userInputNumber.makeNumbers();
 
             referee.playBaseBall(computer.getRandomNumbers(), userInputNumber.getUserNumbers());
-            // re
-            // outputview 클래스
-            System.out.println(referee.getStrike() + STRIKE + referee.getBall() + BALL);
-            //
-            if (referee.getStrike() == DataBase.getInstance().getStage()) {
-                UserStatusHandler.getInstance().setUserStatus(UserStatus.QUIT);
-            }
 
+            // outputview 클래스로 프린트하기
+            System.out.println("🧢" + referee.getStrike() + STRIKE + "🧢" + referee.getBall() + BALL);
+            allStrikeCheck();
         } while (UserStatusHandler.getInstance().getUserStatus().equals(UserStatus.PLAY));
     }
+
+    private void allStrikeCheck() {
+        if (referee.getStrike() == DataBase.getInstance().getStage()) {
+            UserStatusHandler.getInstance().setUserStatus(UserStatus.QUIT);
+            DataBase.getInstance().setScore();
+        }
+    }
+
 }
