@@ -3,7 +3,7 @@ package data;
 public class DataBase {
     private static final DataBase instance = new DataBase();
     private int stage = 3;
-//    private int score = 0;
+    private int score = 0;
 
     private DataBase() {
     }
@@ -18,5 +18,13 @@ public class DataBase {
 
     public void setStage() {
         this.stage++;
+    }
+
+    public void setScore() {
+        this.score += 100 * stage;
+    }
+
+    public int getScore() {
+        return this.score;
     }
 }
